@@ -1,0 +1,68 @@
+<!-- Brand XML Schema -->
+CREATE XML SCHEMA COLLECTION BrandDetailsSchema AS 
+N'<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="brand_details">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="founded_year" type="xsd:int" />
+        <xsd:element name="headquarters" type="xsd:string" />
+        <xsd:element name="rma_address">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="street" type="xsd:string" />
+              <xsd:element name="city" type="xsd:string" />
+              <xsd:element name="state" type="xsd:string" />
+              <xsd:element name="zip_code" type="xsd:string" />
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>';
+
+<!-- Model XML Schema -->
+CREATE XML SCHEMA COLLECTION ModelDetailsSchema
+AS
+'<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="model_details">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="feature" type="xsd:string" />
+        <xsd:element name="ports" type="xsd:string" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>';
+
+
+<!-- Product XML Schema -->
+CREATE XML SCHEMA COLLECTION ModelDetailsSchema
+AS
+'<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="product_details">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="overview" type="xsd:string" />
+        <xsd:element name="technical_specifications">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="feature" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="images">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="image" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="datasheet" type="xsd:string" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>';
