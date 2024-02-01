@@ -1,0 +1,300 @@
+--BRAND
+
+-- Cisco
+DECLARE @CiscoBrandDetails XML(BrandDetailsSchema);
+
+SET @CiscoBrandDetails = '<?xml version="1.0"?>
+<brand_details>
+  <founded_year>1984</founded_year>
+  <headquarters>San Jose, California</headquarters>
+  <rma_address>
+    <street>123 Cisco Street</street>
+    <city>San Jose</city>
+    <state>California</state>
+    <zip_code>12345</zip_code>
+  </rma_address>
+</brand_details>';
+
+INSERT INTO [Brand] ([Brand_Name], [Brand_Details], [Brand_Website], [Brand_Category])
+VALUES ('Cisco', @CiscoBrandDetails, 'https://www.cisco.com/', 'Networking');
+
+-- Juniper
+DECLARE @JuniperBrandDetails XML;
+
+SET @JuniperBrandDetails = 
+    '<brand_details>
+        <founded_year>1996</founded_year>
+        <headquarters>Sunnyvale, California</headquarters>
+        <rma_address>
+            <street>456 Juniper Street</street>
+            <city>Sunnyvale</city>
+            <state>California</state>
+            <zip_code>67890</zip_code>
+        </rma_address>
+    </brand_details>';
+
+INSERT INTO [Brand] ([Brand_Name], [Brand_Details], [Brand_Website], [Brand_Category])
+VALUES ('Juniper', @JuniperBrandDetails, 'https://www.juniper.net/', 'Networking');
+
+-- HPE Aruba
+DECLARE @HPEArubaBrandDetails XML(BrandDetailsSchema);
+
+SET @HPEArubaBrandDetails = 
+    '<brand_details>
+        <founded_year>2015</founded_year>
+        <headquarters>Santa Clara, California</headquarters>
+        <rma_address>
+            <street>789 Aruba Street</street>
+            <city>Santa Clara</city>
+            <state>California</state>
+            <zip_code>45678</zip_code>
+        </rma_address>
+    </brand_details>';
+
+INSERT INTO [Brand] ([Brand_Name], [Brand_Details], [Brand_Website], [Brand_Category])
+VALUES ('HPE Aruba', @HPEArubaBrandDetails, 'https://www.arubanetworks.com/', 'Networking');
+
+-- Arista
+DECLARE @AristaBrandDetails XML(BrandDetailsSchema);
+SET @AristaBrandDetails = 
+    '<brand_details>
+        <founded_year>2004</founded_year>
+        <headquarters>Santa Clara, California</headquarters>
+        <rma_address>
+            <street>101 Arista Street</street>
+            <city>Santa Clara</city>
+            <state>California</state>
+            <zip_code>23456</zip_code>
+        </rma_address>
+    </brand_details>';
+
+INSERT INTO [Brand] ([Brand_Name], [Brand_Details], [Brand_Website], [Brand_Category])
+VALUES ('Arista', @AristaBrandDetails, 'https://www.arista.com/', 'Networking');
+
+--SHIPPINGTOBRAND
+
+INSERT INTO [ShippingtoBrand] ([Brand_ID], [Shipping_Date], [Return_Info], [Cargo_Name])
+VALUES
+(4, '2023-12-11', 'Defective product return for repair', 'XYZ Shipping');
+
+--TECHNICIAN
+
+INSERT INTO [Technician] ([Tech_Name], [Tech_Qual], [Tech_Tiitle], [Tech_Email])
+VALUES
+('John Doe', 'Certified Technician', 'Senior Technician', 'john.doe@example.com');
+
+INSERT INTO [Technician] ([Tech_Name], [Tech_Qual], [Tech_Tiitle], [Tech_Email])
+VALUES
+('Jane Smith', 'Network Specialist', 'Technician I', 'jane.smith@example.com');
+
+--MODEL
+
+-- Cisco model
+DECLARE @ModelX1Details XML(ModelDetailsSchema);
+SET @ModelX1Details = '<?xml version="1.0"?>
+<model_details>
+  <feature>High-speed internet</feature>
+  <ports>10 Gigabit Ethernet</ports>
+</model_details>';
+
+INSERT INTO [Model] ([Model_Name], [Brand_ID], [Model_Category], [Model_Details])
+VALUES ('ModelX1', 1, 'Router', @ModelX1Details);
+
+DECLARE @ModelY2Details XML(ModelDetailsSchema);
+SET @ModelY2Details = '<?xml version="1.0"?>
+<model_details>
+  <feature>Power over Ethernet</feature>
+  <ports>24 Gigabit Ethernet</ports>
+</model_details>';
+
+INSERT INTO [Model] ([Model_Name], [Brand_ID], [Model_Category], [Model_Details])
+VALUES ('ModelY2', 1, 'Switch', @ModelY2Details);
+
+-- Juniper model
+DECLARE @ModelZ3Details XML(ModelDetailsSchema);
+SET @ModelZ3Details = '<?xml version="1.0"?>
+<model_details>
+  <feature>Intrusion Prevention System</feature>
+  <ports>8 Gigabit Ethernet</ports>
+</model_details>';
+
+INSERT INTO [Model] ([Model_ID], [Model_Name], [Brand_ID], [Model_Category], [Model_Details])
+VALUES ('ModelZ3', 2, 'Firewall', @ModelZ3Details);
+
+-- HPE Aruba model
+DECLARE @ModelW4Details XML(ModelDetailsSchema);
+SET @ModelW4Details = '<?xml version="1.0"?>
+<model_details>
+  <feature>Wireless AC technology</feature>
+  <ports>Dual-band antennas</ports>
+</model_details>';
+
+INSERT INTO [Model] ([Model_ID], [Model_Name], [Brand_ID], [Model_Category], [Model_Details])
+VALUES ('ModelW4', 3, 'Access Point', @ModelW4Details);
+
+-- Arista model
+DECLARE @ModelV5Details XML(ModelDetailsSchema);
+SET @ModelV5Details = '<?xml version="1.0"?>
+<model_details>
+  <feature>Cloud networking support</feature>
+  <ports>40 Gigabit Ethernet</ports>
+</model_details>';
+
+INSERT INTO [Model] ([Model_ID], [Model_Name], [Brand_ID], [Model_Category], [Model_Details])
+VALUES ('ModelV5', 4, 'Switch', @ModelV5Details);
+
+--CUSTOMER
+
+INSERT INTO [Customer] ([Customer_Name], [Customer_Address], [Customer_Phone], [Customer_Email])
+VALUES
+('Alice Johnson', '123 Main St, Cityville', '555-1234', 'alice@example.com');
+
+INSERT INTO [Customer] ([Customer_Name], [Customer_Address], [Customer_Phone], [Customer_Email])
+VALUES
+('Bob Smith', '456 Oak St, Townsville', '555-5678', 'bob@example.com');
+
+INSERT INTO [Customer] ([Customer_Name], [Customer_Address], [Customer_Phone], [Customer_Email])
+VALUES
+('Charlie Brown', '789 Pine St, Villagetown', '555-9876', 'charlie@example.com');
+
+INSERT INTO [Customer] ([Customer_Name], [Customer_Address], [Customer_Phone], [Customer_Email])
+VALUES
+('David Williams', '101 Cedar St, Hamletville', '555-4321', 'david@example.com');
+
+--PRODUCT
+
+-- Cisco product
+DECLARE @CiscoRouter123Details XML(ProductDetailsSchema);
+SET @CiscoRouter123Details = '<?xml version="1.0"?>
+<product_details>
+  <overview>High-speed router for enterprise use</overview>
+  <technical_specifications>
+    <feature>High-speed internet</feature>
+    <ports>10 Gigabit Ethernet</ports>
+  </technical_specifications>
+  <images>
+    <image>router_image1.jpg</image>
+    <image>router_image2.jpg</image>
+  </images>
+  <datasheet>CiscoRouter123_Datasheet.pdf</datasheet>
+</product_details>';
+
+INSERT INTO [Product] ([Product_Name], [Product_Sold_Date], [Serial_Number], [Model_ID], [Customer_ID], [Product_Details])
+VALUES ('CiscoRouter123', '2023-01-15', 'SN123', 1, 1, @CiscoRouter123Details);
+
+-- Juniper product
+DECLARE @JuniperSwitch456Details XML(ProductDetailsSchema);
+SET @JuniperSwitch456Details = '<?xml version="1.0"?>
+<product_details>
+  <overview>Powerful switch for network management</overview>
+  <technical_specifications>
+    <feature>Power over Ethernet</feature>
+    <ports>24 Gigabit Ethernet</ports>
+  </technical_specifications>
+  <images>
+    <image>switch_image1.jpg</image>
+    <image>switch_image2.jpg</image>
+  </images>
+  <datasheet>JuniperSwitch456_Datasheet.pdf</datasheet>
+</product_details>';
+
+INSERT INTO [Product] ([Product_Name], [Product_Sold_Date], [Serial_Number], [Model_ID], [Customer_ID], [Product_Details])
+VALUES ('JuniperSwitch456', '2020-02-20', 'SN456', 3, 2, @JuniperSwitch456Details);
+
+-- HPE Aruba product
+DECLARE @ArubaAccessPoint789Details XML(ProductDetailsSchema);
+SET @ArubaAccessPoint789Details = '<?xml version="1.0"?>
+<product_details>
+  <overview>Wireless AC technology Access Point for improved connectivity</overview>
+  <technical_specifications>
+    <feature>Wireless AC technology</feature>
+    <ports>Dual-band antennas</ports>
+  </technical_specifications>
+  <images>
+    <image>access_point_image1.jpg</image>
+    <image>access_point_image2.jpg</image>
+  </images>
+  <datasheet>ArubaAccessPoint789_Datasheet.pdf</datasheet>
+</product_details>';
+
+INSERT INTO [Product] ([Product_Name], [Product_Sold_Date], [Serial_Number], [Model_ID], [Customer_ID], [Product_Details])
+VALUES ('ArubaAccessPoint789', '2023-03-10', 'SN789', 4, 3, @ArubaAccessPoint789Details);
+
+-- Arista product
+DECLARE @AristaSwitch101Details XML(ProductDetailsSchema);
+SET @AristaSwitch101Details = '<?xml version="1.0"?>
+<product_details>
+  <overview>Cloud networking support Switch for advanced network infrastructure</overview>
+  <technical_specifications>
+    <feature>Cloud networking support</feature>
+    <ports>40 Gigabit Ethernet</ports>
+  </technical_specifications>
+  <images>
+    <image>switch_image1.jpg</image>
+    <image>switch_image2.jpg</image>
+  </images>
+  <datasheet>AristaSwitch101_Datasheet.pdf</datasheet>
+</product_details>';
+
+INSERT INTO [Product] ([Product_Name], [Product_Sold_Date], [Serial_Number], [Model_ID], [Customer_ID], [Product_Details])
+VALUES ('AristaSwitch101', '2023-04-05', 'SN101', 5, 4, @AristaSwitch101Details);
+
+-- Another Cisco product without sold date and customer
+DECLARE @CiscoRouter456Details XML(ProductDetailsSchema);
+SET @CiscoRouter456Details = '<?xml version="1.0"?>
+<product_details>
+  <overview>Advanced router for secure network communication</overview>
+  <technical_specifications>
+    <feature>High-speed internet</feature>
+    <ports>12 Gigabit Ethernet</ports>
+  </technical_specifications>
+  <images>
+    <image>router_image1.jpg</image>
+    <image>router_image2.jpg</image>
+  </images>
+  <datasheet>CiscoRouter456_Datasheet.pdf</datasheet>
+</product_details>';
+
+INSERT INTO [Product] ([Product_Name], [Serial_Number], [Model_ID], [Product_Details])
+VALUES ('CiscoRouter456', NULL, 2, @CiscoRouter456Details);
+
+--RETURNTOCUSTOMER
+
+INSERT INTO [ReturntoCustomer] ([Customer_ID], [Cargo_Name], [Shipping_Date], [Return_Info])
+VALUES
+(1, 'JKL Shipping', '2023-02-15', 'Software update applied, shipment to customer');
+
+INSERT INTO [ReturntoCustomer] ([Customer_ID], [Cargo_Name], [Shipping_Date], [Return_Info])
+VALUES
+(2, 'DEF Logistics', '2023-03-10', 'Replaced product shipment to customer');
+
+INSERT INTO [ReturntoCustomer] ([Customer_ID], [Cargo_Name], [Shipping_Date], [Return_Info])
+VALUES
+(3, 'GHI Express', '2023-04-05', 'Antenna replaced, shipment to customer');
+
+--RMA
+
+INSERT INTO [RMA] ([Inspection_Start_Date], [Inspection_Completion_Date], [Product_Defect], [Check_Issue], [Result_Issue], [Product_ID], [Technician_ID], [Return_Shipping_ID], [Shipping_Brand_ID])
+VALUES
+('2024-01-15', '2024-01-20', 'Software malfunction', 'Error messages on the screen', 'Applied software update', 1, 1, 1, NULL);
+
+INSERT INTO [RMA] ([Inspection_Start_Date], [Inspection_Completion_Date], [Product_Defect], [Check_Issue], [Result_Issue], [Product_ID], [Technician_ID], [Return_Shipping_ID], [Shipping_Brand_ID])
+VALUES
+('2024-02-15', '2024-02-18', 'Network connectivity issues', 'Intermittent connection drops', 'Reconfigured network settings', 2, 2, 2, NULL);
+
+INSERT INTO [RMA] ([Inspection_Start_Date], [Inspection_Completion_Date], [Product_Defect], [Check_Issue], [Result_Issue], [Product_ID], [Technician_ID], [Return_Shipping_ID], [Shipping_Brand_ID])
+VALUES
+('2024-03-10', '2024-03-15', 'Antenna failure', 'Weak signal strength', 'Replaced faulty antenna', 3, 2, 3, NULL);
+
+INSERT INTO [RMA] ([Inspection_Start_Date], [Inspection_Completion_Date], [Product_Defect], [Check_Issue], [Result_Issue], [Product_ID], [Technician_ID], [Return_Shipping_ID], [Shipping_Brand_ID])
+VALUES
+('2024-12-05', '2024-12-10', 'Hardware failure', 'Unable to power on', 'send brand to replaced faulty components', 4, 1, NULL, 1);
+
+
+
+
+
+
+
+
+
