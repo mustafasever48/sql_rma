@@ -1,6 +1,7 @@
 <!-- Brand XML Schema -->
-CREATE XML SCHEMA COLLECTION BrandDetailsSchema AS 
-N'<?xml version="1.0"?>
+CREATE XML SCHEMA COLLECTION BrandDetailsSchema 
+AS 
+'<?xml version="1.0"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <xsd:element name="brand_details">
     <xsd:complexType>
