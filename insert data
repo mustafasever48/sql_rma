@@ -118,7 +118,7 @@ SET @ModelZ3Details = '<?xml version="1.0"?>
   <ports>8 Gigabit Ethernet</ports>
 </model_details>';
 
-INSERT INTO [Model] ([Model_ID], [Model_Name], [Brand_ID], [Model_Category], [Model_Details])
+INSERT INTO [Model] ([Model_Name], [Brand_ID], [Model_Category], [Model_Details])
 VALUES ('ModelZ3', 2, 'Firewall', @ModelZ3Details);
 
 -- HPE Aruba model
@@ -129,7 +129,7 @@ SET @ModelW4Details = '<?xml version="1.0"?>
   <ports>Dual-band antennas</ports>
 </model_details>';
 
-INSERT INTO [Model] ([Model_ID], [Model_Name], [Brand_ID], [Model_Category], [Model_Details])
+INSERT INTO [Model] ([Model_Name], [Brand_ID], [Model_Category], [Model_Details])
 VALUES ('ModelW4', 3, 'Access Point', @ModelW4Details);
 
 -- Arista model
@@ -140,7 +140,7 @@ SET @ModelV5Details = '<?xml version="1.0"?>
   <ports>40 Gigabit Ethernet</ports>
 </model_details>';
 
-INSERT INTO [Model] ([Model_ID], [Model_Name], [Brand_ID], [Model_Category], [Model_Details])
+INSERT INTO [Model] ([Model_Name], [Brand_ID], [Model_Category], [Model_Details])
 VALUES ('ModelV5', 4, 'Switch', @ModelV5Details);
 
 --CUSTOMER
