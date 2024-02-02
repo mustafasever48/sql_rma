@@ -170,7 +170,7 @@ SET @CiscoRouter123Details = '<?xml version="1.0"?>
   <overview>High-speed router for enterprise use</overview>
   <technical_specifications>
     <feature>High-speed internet</feature>
-    <ports>10 Gigabit Ethernet</ports>
+    <feature>10 Gigabit Ethernet</feature>
   </technical_specifications>
   <images>
     <image>router_image1.jpg</image>
@@ -189,7 +189,7 @@ SET @JuniperSwitch456Details = '<?xml version="1.0"?>
   <overview>Powerful switch for network management</overview>
   <technical_specifications>
     <feature>Power over Ethernet</feature>
-    <ports>24 Gigabit Ethernet</ports>
+    <feature>24 Gigabit Ethernet</feature>
   </technical_specifications>
   <images>
     <image>switch_image1.jpg</image>
@@ -208,7 +208,7 @@ SET @ArubaAccessPoint789Details = '<?xml version="1.0"?>
   <overview>Wireless AC technology Access Point for improved connectivity</overview>
   <technical_specifications>
     <feature>Wireless AC technology</feature>
-    <ports>Dual-band antennas</ports>
+    <feature>Dual-band antennas</feature>
   </technical_specifications>
   <images>
     <image>access_point_image1.jpg</image>
@@ -227,7 +227,7 @@ SET @AristaSwitch101Details = '<?xml version="1.0"?>
   <overview>Cloud networking support Switch for advanced network infrastructure</overview>
   <technical_specifications>
     <feature>Cloud networking support</feature>
-    <ports>40 Gigabit Ethernet</ports>
+    <feature>40 Gigabit Ethernet</feature>
   </technical_specifications>
   <images>
     <image>switch_image1.jpg</image>
@@ -246,7 +246,7 @@ SET @CiscoRouter456Details = '<?xml version="1.0"?>
   <overview>Advanced router for secure network communication</overview>
   <technical_specifications>
     <feature>High-speed internet</feature>
-    <ports>12 Gigabit Ethernet</ports>
+    <feature>12 Gigabit Ethernet</feature>
   </technical_specifications>
   <images>
     <image>router_image1.jpg</image>
@@ -257,6 +257,7 @@ SET @CiscoRouter456Details = '<?xml version="1.0"?>
 
 INSERT INTO [Product] ([Product_Name], [Serial_Number], [Model_ID], [Product_Details])
 VALUES ('CiscoRouter456', NULL, 2, @CiscoRouter456Details);
+
 
 --RETURNTOCUSTOMER
 
