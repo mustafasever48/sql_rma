@@ -1,313 +1,136 @@
--- Cisco
-INSERT INTO [Brand] ([Brand_ID], [Brand_Name], [Brand_Details], [Brand_Website], [Brand_Category])
-VALUES
-(1, 'Cisco', '<?xml version="1.0"?>
-<brand_details>
-  <founded_year>1984</founded_year>
-  <headquarters>San Jose, California</headquarters>
-  <rma_address>
-    <street>123 Cisco Street</street>
-    <city>San Jose</city>
-    <state>California</state>
-    <zip_code>12345</zip_code>
-  </rma_address>
-</brand_details>',
-'https://www.cisco.com/', 'Networking');
-
--- Juniper
-INSERT INTO [Brand] ([Brand_ID], [Brand_Name], [Brand_Details], [Brand_Website], [Brand_Category])
-VALUES
-(2, 'Juniper', '<?xml version="1.0"?>
-<brand_details>
-  <founded_year>1996</founded_year>
-  <headquarters>Sunnyvale, California</headquarters>
-  <rma_address>
-    <street>456 Juniper Street</street>
-    <city>Sunnyvale</city>
-    <state>California</state>
-    <zip_code>67890</zip_code>
-  </rma_address>
-</brand_details>',
-'https://www.juniper.net/', 'Networking');
-
--- HPE Aruba
-INSERT INTO [Brand] ([Brand_ID], [Brand_Name], [Brand_Details], [Brand_Website], [Brand_Category])
-VALUES
-(3, 'HPE Aruba', '<?xml version="1.0"?>
-<brand_details>
-  <founded_year>2015</founded_year>
-  <headquarters>Santa Clara, California</headquarters>
-  <rma_address>
-    <street>789 Aruba Street</street>
-    <city>Santa Clara</city>
-    <state>California</state>
-    <zip_code>45678</zip_code>
-  </rma_address>
-</brand_details>',
-'https://www.arubanetworks.com/', 'Networking');
-
--- Arista
-INSERT INTO [Brand] ([Brand_ID], [Brand_Name], [Brand_Details], [Brand_Website], [Brand_Category])
-VALUES
-(4, 'Arista', '<?xml version="1.0"?>
-<brand_details>
-  <founded_year>2004</founded_year>
-  <headquarters>Santa Clara, California</headquarters>
-  <rma_address>
-    <street>101 Arista Street</street>
-    <city>Santa Clara</city>
-    <state>California</state>
-    <zip_code>23456</zip_code>
-  </rma_address>
-</brand_details>',
-'https://www.arista.com/', 'Networking');
-
---Brand XML Schema
-CREATE XML SCHEMA COLLECTION BrandDetailsSchema AS 
-N'<?xml version="1.0"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <xsd:element name="brand_details">
-    <xsd:complexType>
-      <xsd:sequence>
-        <xsd:element name="founded_year" type="xsd:int" />
-        <xsd:element name="headquarters" type="xsd:string" />
-        <xsd:element name="rma_address">
-          <xsd:complexType>
-            <xsd:sequence>
-              <xsd:element name="street" type="xsd:string" />
-              <xsd:element name="city" type="xsd:string" />
-              <xsd:element name="state" type="xsd:string" />
-              <xsd:element name="zip_code" type="xsd:string" />
-            </xsd:sequence>
-          </xsd:complexType>
-        </xsd:element>
-      </xsd:sequence>
-    </xsd:complexType>
-  </xsd:element>
-</xsd:schema>';
-
--- Cisco model
-INSERT INTO [Model] ([Model_ID], [Model_Name], [Brand_ID], [Model_Category], [Model_Details])
-VALUES (1, 'ModelX1', 1, 'Router', '<?xml version="1.0"?>
-<model_details>
-  <feature>High-speed internet</feature>
-  <ports>10 Gigabit Ethernet</ports>
-</model_details>');
-
-INSERT INTO [Model] ([Model_ID], [Model_Name], [Brand_ID], [Model_Category], [Model_Details])
-VALUES (2, 'ModelY2', 1, 'Switch', '<?xml version="1.0"?>
-<model_details>
-  <feature>Power over Ethernet</feature>
-  <ports>24 Gigabit Ethernet</ports>
-</model_details>');
-
--- Juniper model
-INSERT INTO [Model] ([Model_ID], [Model_Name], [Brand_ID], [Model_Category], [Model_Details])
-VALUES (3, 'ModelZ3', 2, 'Firewall', '<?xml version="1.0"?>
-<model_details>
-  <feature>Intrusion Prevention System</feature>
-  <ports>8 Gigabit Ethernet</ports>
-</model_details>');
-
--- HPE Aruba model
-INSERT INTO [Model] ([Model_ID], [Model_Name], [Brand_ID], [Model_Category], [Model_Details])
-VALUES (4, 'ModelW4', 3, 'Access Point', '<?xml version="1.0"?>
-<model_details>
-  <feature>Wireless AC technology</feature>
-  <ports>Dual-band antennas</ports>
-</model_details>');
-
--- Arista model
-INSERT INTO [Model] ([Model_ID], [Model_Name], [Brand_ID], [Model_Category], [Model_Details])
-VALUES (5, 'ModelV5', 4, 'Switch', '<?xml version="1.0"?>
-<model_details>
-  <feature>Cloud networking support</feature>
-  <ports>40 Gigabit Ethernet</ports>
-</model_details>');
-
---Model XML Schema
-CREATE XML SCHEMA COLLECTION ModelDetailsSchema
-AS
-'<?xml version="1.0"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <xsd:element name="model_details">
-    <xsd:complexType>
-      <xsd:sequence>
-        <xsd:element name="feature" type="xsd:string" />
-        <xsd:element name="ports" type="xsd:string" />
-      </xsd:sequence>
-    </xsd:complexType>
-  </xsd:element>
-</xsd:schema>';
-
--- Cisco product
-INSERT INTO [Product] ([Product_ID], [Product_Name], [Product_Sold_Date], [Serial_Number], [Model_ID], [Customer_ID], [Product_Details])
-VALUES (1, 'CiscoRouter123', '2022-01-15', 'SN123', 1, 1, '<?xml version="1.0"?>
-<product_details>
-  <overview>High-speed router for enterprise use</overview>
-  <technical_specifications>
-    <feature>High-speed internet</feature>
-    <ports>10 Gigabit Ethernet</ports>
-  </technical_specifications>
-  <images>
-    <image>router_image1.jpg</image>
-    <image>router_image2.jpg</image>
-  </images>
-  <datasheet>CiscoRouter123_Datasheet.pdf</datasheet>
-</product_details>');
-
--- Juniper product
-INSERT INTO [Product] ([Product_ID], [Product_Name], [Product_Sold_Date], [Serial_Number], [Model_ID], [Customer_ID], [Product_Details])
-VALUES (2, 'JuniperSwitch456', '2022-02-20', 'SN456', 3, 2, '<?xml version="1.0"?>
-<product_details>
-  <overview>Powerful switch for network management</overview>
-  <technical_specifications>
-    <feature>Power over Ethernet</feature>
-    <ports>24 Gigabit Ethernet</ports>
-  </technical_specifications>
-  <images>
-    <image>switch_image1.jpg</image>
-    <image>switch_image2.jpg</image>
-  </images>
-  <datasheet>JuniperSwitch456_Datasheet.pdf</datasheet>
-</product_details>');
-
--- HPE Aruba product
-INSERT INTO [Product] ([Product_ID], [Product_Name], [Product_Sold_Date], [Serial_Number], [Model_ID], [Customer_ID], [Product_Details])
-VALUES (3, 'ArubaAccessPoint789', '2022-03-10', 'SN789', 4, 3, '<?xml version="1.0"?>
-<product_details>
-  <overview>Wireless AC technology Access Point for improved connectivity</overview>
-  <technical_specifications>
-    <feature>Wireless AC technology</feature>
-    <ports>Dual-band antennas</ports>
-  </technical_specifications>
-  <images>
-    <image>access_point_image1.jpg</image>
-    <image>access_point_image2.jpg</image>
-  </images>
-  <datasheet>ArubaAccessPoint789_Datasheet.pdf</datasheet>
-</product_details>');
-
--- Arista product
-INSERT INTO [Product] ([Product_ID], [Product_Name], [Product_Sold_Date], [Serial_Number], [Model_ID], [Customer_ID], [Product_Details])
-VALUES (4, 'AristaSwitch101', '2022-04-05', 'SN101', 5, 4, '<?xml version="1.0"?>
-<product_details>
-  <overview>Cloud networking support Switch for advanced network infrastructure</overview>
-  <technical_specifications>
-    <feature>Cloud networking support</feature>
-    <ports>40 Gigabit Ethernet</ports>
-  </technical_specifications>
-  <images>
-    <image>switch_image1.jpg</image>
-    <image>switch_image2.jpg</image>
-  </images>
-  <datasheet>AristaSwitch101_Datasheet.pdf</datasheet>
-</product_details>');
-
-INSERT INTO [Product] ([Product_ID], [Product_Name], [Product_Sold_Date], [Serial_Number], [Model_ID], [Customer_ID], [Product_Details])
-VALUES (5, 'CiscoRouter456', NULL, 'SN456', 2, NULL, '<?xml version="1.0"?>
-<product_details>
-  <overview>Advanced router for secure network communication</overview>
-  <technical_specifications>
-    <feature>High-speed internet</feature>
-    <ports>12 Gigabit Ethernet</ports>
-  </technical_specifications>
-  <images>
-    <image>router_image1.jpg</image>
-    <image>router_image2.jpg</image>
-  </images>
-  <datasheet>CiscoRouter456_Datasheet.pdf</datasheet>
-</product_details>');
-
---Product XML Schema
-CREATE XML SCHEMA COLLECTION ModelDetailsSchema
-AS
-'<?xml version="1.0"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <xsd:element name="product_details">
-    <xsd:complexType>
-      <xsd:sequence>
-        <xsd:element name="overview" type="xsd:string" />
-        <xsd:element name="technical_specifications">
-          <xsd:complexType>
-            <xsd:sequence>
-              <xsd:element name="feature" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
-            </xsd:sequence>
-          </xsd:complexType>
-        </xsd:element>
-        <xsd:element name="images">
-          <xsd:complexType>
-            <xsd:sequence>
-              <xsd:element name="image" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
-            </xsd:sequence>
-          </xsd:complexType>
-        </xsd:element>
-        <xsd:element name="datasheet" type="xsd:string" />
-      </xsd:sequence>
-    </xsd:complexType>
-  </xsd:element>
-</xsd:schema>';
-
---Customer
-INSERT INTO [Customer] ([Customer_ID], [Customer_Name], [Customer_Address], [Customer_Phone], [Customer_Email])
-VALUES
-(1, 'Alice Johnson', '123 Main St, Cityville', '555-1234', 'alice@example.com');
-
-INSERT INTO [Customer] ([Customer_ID], [Customer_Name], [Customer_Address], [Customer_Phone], [Customer_Email])
-VALUES
-(2, 'Bob Smith', '456 Oak St, Townsville', '555-5678', 'bob@example.com');
-
-INSERT INTO [Customer] ([Customer_ID], [Customer_Name], [Customer_Address], [Customer_Phone], [Customer_Email])
-VALUES
-(3, 'Charlie Brown', '789 Pine St, Villagetown', '555-9876', 'charlie@example.com');
-
-INSERT INTO [Customer] ([Customer_ID], [Customer_Name], [Customer_Address], [Customer_Phone], [Customer_Email])
-VALUES
-(4, 'David Williams', '101 Cedar St, Hamletville', '555-4321', 'david@example.com');
+create procedure sp_product_name
+    @BrandFilter nvarchar(50)=null,
+    @ModelFilter nvarchar(50)=null,
+    @ProductFilter nvarchar(50)=null
+    
+as
+select Brand.Brand_Name,Model.Model_Name,Product.Product_Name
+from Product
+    join Model on Product.Model_ID=Model.Model_ID
+    join Brand on Model.Brand_ID=Brand.Brand_ID
+where
+        (@BrandFilter is null or Brand.Brand_Name like @BrandFilter)
+        and (@ModelFilter is null or Model.Model_Name like @ModelFilter)
+	and (@ProductFilter is null or Product.Product_Name like @ProductFilter);
+exec sp_product_name
+exec sp_product_name @BrandFilter = 'Cisc%';
+exec sp_product_name @BrandFilter = 'Cisc%',@ModelFilter = 'ModelX1',@ProductFilter='%Router%';
 
 
---returntocustomer
-INSERT INTO [ReturntoCustomer] ([Return_Shipping_ID], [Customer_ID], [Cargo_Name], [Shipping_Date], [Return_Info])
-VALUES
-(1, 1, 'JKL Shipping', '2023-02-15', 'Software update applied, shipment to customer');
-
-INSERT INTO [ReturntoCustomer] ([Return_Shipping_ID], [Customer_ID], [Cargo_Name], [Shipping_Date], [Return_Info])
-VALUES
-(2, 2, 'DEF Logistics', '2023-03-10', 'Replaced product shipment to customer');
-
-INSERT INTO [ReturntoCustomer] ([Return_Shipping_ID], [Customer_ID], [Cargo_Name], [Shipping_Date], [Return_Info])
-VALUES
-(3, 3, 'GHI Express', '2023-04-05', 'Antenna replaced, shipment to customer');
-
---RMA
-INSERT INTO [RMA] ([RMA_ID], [Inspection_Start_Date], [Inspection_Completion_Date], [Product_Defect], [Check_Issue], [Result_Issue], [Product_ID], [Technician_ID], [Return_Shipping_ID], [Shipping_Brand_ID])
-VALUES
-(1, '2023-01-15', '2023-01-20', 'Software malfunction', 'Error messages on the screen', 'Applied software update', 1, 1, 1, NULL);
-
-INSERT INTO [RMA] ([RMA_ID], [Inspection_Start_Date], [Inspection_Completion_Date], [Product_Defect], [Check_Issue], [Result_Issue], [Product_ID], [Technician_ID], [Return_Shipping_ID], [Shipping_Brand_ID])
-VALUES
-(2, '2023-02-15', '2023-02-18', 'Network connectivity issues', 'Intermittent connection drops', 'Reconfigured network settings', 2, 2, 2, NULL);
-
-INSERT INTO [RMA] ([RMA_ID], [Inspection_Start_Date], [Inspection_Completion_Date], [Product_Defect], [Check_Issue], [Result_Issue], [Product_ID], [Technician_ID], [Return_Shipping_ID], [Shipping_Brand_ID])
-VALUES
-(3, '2023-03-10', '2023-03-15', 'Antenna failure', 'Weak signal strength', 'Replaced faulty antenna', 3, 2, 3, NULL);
-
-INSERT INTO [RMA] ([RMA_ID], [Inspection_Start_Date], [Inspection_Completion_Date], [Product_Defect], [Check_Issue], [Result_Issue], [Product_ID], [Technician_ID], [Return_Shipping_ID], [Shipping_Brand_ID])
-VALUES
-(4, '2023-12-05', '2023-12-10', 'Hardware failure', 'Unable to power on', 'send brand to replaced faulty components', 4, 1, NULL, 1);
-
---shippingtobrand
-INSERT INTO [ShippingtoBrand] ([Shipping_Brand_ID], [Brand_ID], [Shipping_Date], [Return_Info], [Cargo_Name])
-VALUES
-(1, 4, '2023-12-11', 'Defective product return for repair', 'XYZ Shipping');
-
---Technician
-INSERT INTO [Technician] ([Technician_ID], [Tech_Name], [Tech_Qual], [Tech_Tiitle], [Tech_Email])
-VALUES
-(1, 'John Doe', 'Certified Technician', 'Senior Technician', 'john.doe@example.com');
-
-INSERT INTO [Technician] ([Technician_ID], [Tech_Name], [Tech_Qual], [Tech_Tiitle], [Tech_Email])
-VALUES
-(2, 'Jane Smith', 'Network Specialist', 'Technician I', 'jane.smith@example.com');
+create procedure sp_rma_count_by_product
+as
+begin
+    select Brand.Brand_Name,Model.Model_Name,Product.Product_Name,
+    count(RMA.RMA_ID) as RMACount
+    from Product
+    join Model on Product.Model_ID=Model.Model_ID
+    join Brand on Model.Brand_ID=Brand.Brand_ID
+    left join RMA on Product.Product_ID=RMA.Product_ID
+    group by Brand.Brand_Name,Model.Model_Name,Product.Product_Name;
+end
 
 
+exec sp_rma_count_by_product;
+
+
+create procedure sp_rma_count_by_productbyhaving
+as
+begin
+    select Brand.Brand_Name,Model.Model_Name,Product.Product_Name,
+    count(RMA.RMA_ID) as RMACount
+    from Product
+    join Model on Product.Model_ID=Model.Model_ID
+    join Brand on Model.Brand_ID=Brand.Brand_ID
+    left join RMA on Product.Product_ID=RMA.Product_ID
+    group by Brand.Brand_Name,Model.Model_Name,Product.Product_Name
+    having count(RMA.RMA_ID)>=1
+    order by Brand.Brand_Name
+end
+
+
+exec sp_rma_count_by_productbyhaving
+
+
+
+--first function
+create function dbo.CalculateRMADuration
+    (@StartMaintenanceDate date, @EndMaintanenceDate date)
+returns Int
+as
+begin
+    declare @DurationInDays Int;
+    set @DurationInDays=datediff(day,@StartMaintenanceDate,@EndMaintanenceDate)
+    return @DurationInDays;
+end;
+
+--second function
+
+create function dbo.GetRepairDurationForRMA
+    (@RMA_ID Int)
+returns Int
+as
+begin
+    declare @RepareDuration Int;
+    declare @StartMaintenanceDate date;
+    declare @EndMaintanenceDate date;
+    
+    select 
+        @StartMaintenanceDate = Inspection_Start_Date,
+        @EndMaintenanceDate = Inspection_Completion_Date
+
+    from RMA
+    where RMA_ID=@RMA_ID;
+    
+    if @EndMaintanenceDate is null 
+    begin
+    print 'Warning: The maintenance process has not been completed.'
+    
+    set @RepareDuration=dbo.CalculateRMADuration(@StartMaintenanceDate,@EndMaintanenceDate);
+    print 'Repair Time (day): ' + convert(nvarchar(10), @RepairDuration);
+    return @RepareDuration;
+end;
+
+--query
+declare @RepareDuration Int;
+set @RepareDuration=dbo.CalculateRMADuration(1);
+
+    
+
+
+create trigger trg_UpdateRMAStatus
+on RMA
+after insert,update 
+as
+begin
+    set nocount on;
+    declare @RMA_ID Int,@Inspection_Start_Date date,@Inspection_Completion_Date date;
+    select @RMA_ID=RMA_ID,@Inspection_Start_Date=Inspection_Start_Date,@Inspection_Completion_Date=Inspection_Completion_Date
+    from inserted; 
+    update RMA
+        set RMAStatus = 
+        case  
+            when @Inspection_Completion_Date is not null then 'Completed'
+            when @Inspection_Start_Date is not null then'Started'
+            else 'Pending'
+        end
+    where RMA_ID = @RMA_ID;
+
+    print ('RMA Status Updated');
+end;
+
+
+
+create trigger trg_CheckWarrantyStatus
+on RMA
+after insert,update
+as
+begin
+    update RMA
+    set Warranty_Status=
+        case
+            when datediff(year,Product_Sold_Date,getdate())<=2 then 'valid'
+            else 'non-valid'
+        end
+    from RMA
+    join Product on RMA.Product_ID=Product.Product_ID
+end;
