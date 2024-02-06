@@ -1,0 +1,92 @@
+--view 1
+create view vw_CustomerRMAStatus
+as
+select
+    R.RMA_ID,
+    R.Inspection_Start_Date,
+    R.Inspection_Completion_Date,
+    R.Product_Defect,
+    R.Check_Issue,
+    R.Result_Issue,
+    P.Product_Name,
+    M.Model_Name,
+    B.Brand_Name,
+    S.Cargo_Name,
+    S.Shipping_Date,
+    C.Customer_ID,
+    C.Customer_Name,
+    C.Customer_Address,
+    C.Customer_Phone,
+    C.Customer_Email
+from
+    RMA 
+inner join
+    Product on R.Product_ID = P.Product_ID
+inner join
+    Model on P.Model_ID = M.Model_ID
+inner join
+    Brand on M.Brand_ID = B.Brand_ID
+left join
+    ReturntoCustomer on R.Return_Shipping_ID = S.Return_Shipping_ID
+left join
+    Customer on P.Customer_ID = C.Customer_ID;
+
+
+--query
+declare @Customer_ID Int
+set @Customer_ID = 1 
+
+select *
+from vw_CustomerRMAStatus
+where Customer_ID = @Customer_ID;
+
+--view 2
+create view vw_TechnicianRMAStatus
+as
+select
+    R.RMA_ID,
+    R.Inspection_Start_Date,
+    R.Inspection_Completion_Date,
+    R.Product_Defect,
+    R.Check_Issue,
+    R.Result_Issue,
+    P.Product_Name,
+    M.Model_Name,
+    B.Brand_Name,
+    S.Cargo_Name,
+    S.Shipping_Date,
+    C.Customer_ID,
+    C.Customer_Name,
+    C.Customer_Address,
+    C.Customer_Phone,
+    C.Customer_Email
+    T.Technician_ID
+    T.Tech_Name
+    S.Shipping_to_Brand_Name
+    S.Shipping_Date
+    S.Cargo_Name    
+from
+    RMA 
+inner join
+    Product on R.Product_ID = P.Product_ID
+inner join
+    Model on P.Model_ID = M.Model_ID
+inner join
+    Brand on M.Brand_ID = B.Brand_ID
+left join
+    ReturntoCustomer on R.Return_Shipping_ID = S.Return_Shipping_ID
+left join
+    Customer on P.Customer_ID = C.Customer_ID;
+left join
+    Technician on RMA.Technician_ID=T.Technician_ID
+left join
+    ShippingtoBrand on RMA.Shipping_Brand_ID=S.Shipping_Brand_ID
+
+
+--query
+declare @Customer_ID Int
+set @Customer_ID = 1 
+
+select *
+from vw_CustomerRMAStatus
+where Customer_ID = @Customer_ID;
