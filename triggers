@@ -25,15 +25,11 @@ on RMA
 after insert
 as
 begin
-    
-
     declare @RMA_ID Int, @ProductSoldDate date;
-    
     select @RMA_ID = RMA_ID,
            @ProductSoldDate = Product.Product_Sold_Date
     from inserted
     join Product on inserted.Product_ID = Product.Product_ID;
-
     update RMA
     set Warranty_Status = 
         case 
