@@ -4,7 +4,6 @@ on RMA
 after insert,update 
 as
 begin
-    set nocount on;
     declare @RMA_ID Int,@Inspection_Start_Date date,@Inspection_Completion_Date date;
     select @RMA_ID=RMA_ID,@Inspection_Start_Date=Inspection_Start_Date,@Inspection_Completion_Date=Inspection_Completion_Date
     from inserted; 
