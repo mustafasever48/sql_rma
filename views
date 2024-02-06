@@ -11,25 +11,25 @@ select
     P.Product_Name,
     M.Model_Name,
     B.Brand_Name,
-    S.Cargo_Name,
-    S.Shipping_Date,
+    RE.Cargo_Name,
+    RE.Shipping_Date,
     C.Customer_ID,
     C.Customer_Name,
     C.Customer_Address,
     C.Customer_Phone,
     C.Customer_Email
 from
-    RMA 
+    RMA R
 inner join
-    Product on R.Product_ID = P.Product_ID
+    Product P on R.Product_ID = P.Product_ID
 inner join
-    Model on P.Model_ID = M.Model_ID
+    Model M on P.Model_ID = M.Model_ID
 inner join
-    Brand on M.Brand_ID = B.Brand_ID
+    Brand B on M.Brand_ID = B.Brand_ID
 left join
-    ReturntoCustomer on R.Return_Shipping_ID = S.Return_Shipping_ID
+    ReturntoCustomer RE on R.Return_Shipping_ID = RE.Return_Shipping_ID
 left join
-    Customer on P.Customer_ID = C.Customer_ID;
+    Customer C on P.Customer_ID = C.Customer_ID;
 
 
 --query
@@ -41,7 +41,7 @@ from vw_CustomerRMAStatus
 where Customer_ID = @Customer_ID;
 
 --view 2
-create view vw_TechnicianRMAStatus
+alter view vw_TechnicianRMAStatus
 as
 select
     R.RMA_ID,
@@ -53,34 +53,36 @@ select
     P.Product_Name,
     M.Model_Name,
     B.Brand_Name,
-    S.Cargo_Name,
-    S.Shipping_Date,
+    RE.Cargo_Name,
+    RE.Shipping_Date,
     C.Customer_ID,
     C.Customer_Name,
     C.Customer_Address,
     C.Customer_Phone,
-    C.Customer_Email
-    T.Technician_ID
-    T.Tech_Name
-    S.Shipping_to_Brand_Name
-    S.Shipping_Date
-    S.Cargo_Name    
+    C.Customer_Email,
+    T.Technician_ID,
+    T.Tech_Name,
+    S.Cargo_Name as BCN,
+    S.Shipping_Date as BSD
+       
 from
-    RMA 
+    RMA R
 inner join
-    Product on R.Product_ID = P.Product_ID
+    Product P on R.Product_ID = P.Product_ID
 inner join
-    Model on P.Model_ID = M.Model_ID
+    Model M on P.Model_ID = M.Model_ID
 inner join
-    Brand on M.Brand_ID = B.Brand_ID
+    Brand B on M.Brand_ID = B.Brand_ID
 left join
-    ReturntoCustomer on R.Return_Shipping_ID = S.Return_Shipping_ID
+    ReturntoCustomer RE on R.Return_Shipping_ID = RE.Return_Shipping_ID
 left join
-    Customer on P.Customer_ID = C.Customer_ID;
+    Customer C on P.Customer_ID = C.Customer_ID
 left join
-    Technician on RMA.Technician_ID=T.Technician_ID
+    Technician T on R.Technician_ID=T.Technician_ID
 left join
-    ShippingtoBrand on RMA.Shipping_Brand_ID=S.Shipping_Brand_ID
+    ShippingtoBrand S on R.Shipping_Brand_ID=S.Shipping_Brand_ID;
+
+select*from vw_TechnicianRMAStatus
 
 
 --query
