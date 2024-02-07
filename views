@@ -41,7 +41,7 @@ from vw_CustomerRMAStatus
 where Customer_ID = @Customer_ID;
 
 --view 2
-alter view vw_TechnicianRMAStatus
+create view vw_TechnicianRMAStatus
 as
 select
     R.RMA_ID,
