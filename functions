@@ -1,0 +1,45 @@
+--first function
+create function dbo.CalculateRMADuration
+    (@StartMaintenanceDate date, @EndMaintanenceDate date)
+returns Int
+as
+begin
+    declare @DurationInDays Int;
+    set @DurationInDays=datediff(day,@StartMaintenanceDate,@EndMaintanenceDate)
+    return @DurationInDays;
+end;
+
+--second function
+
+create function dbo.GetRepairDurationForRMA
+    (@RMA_ID Int)
+returns Int
+as
+begin
+    declare @RepareDuration Int;
+    declare @StartMaintenanceDate date;
+    declare @EndMaintanenceDate date;
+    
+    select 
+        @StartMaintenanceDate = Inspection_Start_Date,
+        @EndMaintenanceDate = Inspection_Completion_Date
+
+    from RMA
+    where RMA_ID=@RMA_ID;
+    
+    if @EndMaintanenceDate is null 
+    begin
+    print 'Warning: The maintenance process has not been completed.'
+    
+    set @RepareDuration=dbo.CalculateRMADuration(@StartMaintenanceDate,@EndMaintanenceDate);
+    print 'Repair Time (day): ' + convert(nvarchar(10), @RepairDuration);
+    return @RepareDuration;
+end;
+
+--query
+declare @RepareDuration Int;
+set @RepareDuration=dbo.CalculateRMADuration(1);
+
+    
+
+
