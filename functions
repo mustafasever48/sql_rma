@@ -30,9 +30,9 @@ begin
 end;
 
 --query
-declare @RepareDuration Int;
-set @RepareDuration=dbo.CalculateRMADuration(1);
-
+declare @RepairDuration Int;
+set @RepairDuration = dbo.GetRepairDurationForRMA(1);
+print 'Repair Time (day): ' + convert(nvarchar(10), @RepairDuration);
     
 
 
