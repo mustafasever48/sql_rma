@@ -1,0 +1,55 @@
+--stored procedure 1
+create procedure sp_product_name
+    @BrandFilter nvarchar(50)=null,
+    @ModelFilter nvarchar(50)=null,
+    @ProductFilter nvarchar(50)=null
+    
+as
+select Brand.Brand_Name,Model.Model_Name,Product.Product_Name
+from Product
+    join Model on Product.Model_ID=Model.Model_ID
+    join Brand on Model.Brand_ID=Brand.Brand_ID
+where
+        (@BrandFilter is null or Brand.Brand_Name like @BrandFilter)
+        and (@ModelFilter is null or Model.Model_Name like @ModelFilter)
+	and (@ProductFilter is null or Product.Product_Name like @ProductFilter);
+
+--example query commands
+exec sp_product_name
+exec sp_product_name @BrandFilter = 'Cisc%';
+exec sp_product_name @BrandFilter = 'Cisc%',@ModelFilter = 'ModelX1',@ProductFilter='%Router%';
+
+
+--stored procedure 2
+create procedure sp_rma_count_by_product
+as
+begin
+    select Brand.Brand_Name,Model.Model_Name,Product.Product_Name,
+    count(RMA.RMA_ID) as RMACount
+    from Product
+    join Model on Product.Model_ID=Model.Model_ID
+    join Brand on Model.Brand_ID=Brand.Brand_ID
+    left join RMA on Product.Product_ID=RMA.Product_ID
+    group by Brand.Brand_Name,Model.Model_Name,Product.Product_Name;
+end
+
+--example query command
+exec sp_rma_count_by_product;
+
+--stored procedure 3
+create procedure sp_rma_count_by_productbyhaving
+as
+begin
+    select Brand.Brand_Name,Model.Model_Name,Product.Product_Name,
+    count(RMA.RMA_ID) as RMACount
+    from Product
+    join Model on Product.Model_ID=Model.Model_ID
+    join Brand on Model.Brand_ID=Brand.Brand_ID
+    left join RMA on Product.Product_ID=RMA.Product_ID
+    group by Brand.Brand_Name,Model.Model_Name,Product.Product_Name
+    having count(RMA.RMA_ID)>=1
+    order by Brand.Brand_Name
+end
+
+--example query command
+exec sp_rma_count_by_productbyhaving
