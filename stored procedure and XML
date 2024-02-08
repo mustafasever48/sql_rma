@@ -1,0 +1,97 @@
+--stored procedure 1
+create procedure usp_GetProductFromXML
+    @ProductID Int
+as
+begin
+   
+        select
+            P.Product_ID,
+            P.Product_Name,
+            P.Product_Details.value('(//technical_specifications/feature)[1]', 'VARCHAR(255)') as Feature,
+            B.Brand_Name,
+            M.Model_Name
+        from
+            Product P
+        inner join
+            Model M on P.Model_ID = M.Model_ID
+        inner join
+            Brand B on M.Brand_ID = B.Brand_ID
+        where
+            P.Product_ID = @ProductID;
+   
+end;
+
+--sample query
+select*from Product
+
+declare @ProductID Int
+set @ProductID = 1
+
+exec usp_GetProductFromXML @ProductID;
+
+--stored procedure 2
+
+create procedure usp_UpdateBrandDetails
+    @BrandID Int,
+    @NewStreet varchar(255),
+    @NewCity varchar(255),
+    @NewState varchar(255),
+    @NewZipCode varchar(255)
+as
+begin
+	
+      declare @BrandDetails xml;
+
+      select @BrandDetails = [Brand_Details]
+      from [Brand]
+      where [Brand_ID] = @BrandID;
+
+      set @BrandDetails.modify('
+        replace value of (/brand_details/rma_address/street/text())[1] with sql:variable("@NewStreet")
+    ');
+
+      set @BrandDetails.modify('
+        replace value of (/brand_details/rma_address/city/text())[1] with sql:variable("@NewCity")
+    ');
+
+      set @BrandDetails.modify('
+        replace value of (/brand_details/rma_address/state/text())[1] with sql:variable("@NewState")
+    ');
+
+      set @BrandDetails.modify('
+        replace value of (/brand_details/rma_address/zip_code/text())[1] with sql:variable("@NewZipCode")
+    ');
+
+      update [Brand]
+      set [Brand_Details] = @BrandDetails
+      where [Brand_ID] = @BrandID;
+	
+end;
+--sample query
+declare @BrandID Int
+set @BrandID = 1
+
+exec usp_UpdateBrandDetails @BrandID, '456 Updated Street', 'San Francisco', 'California', '54321';
+
+--stored procedure 3
+create procedure usp_GetAddressFromBrandXML
+    @BrandID Int
+as
+begin
+    select
+        address.value('(street/text())[1]', 'VARCHAR(255)') as Street,
+        address.value('(city/text())[1]', 'VARCHAR(255)') as City,
+        address.value('(state/text())[1]', 'VARCHAR(255)') as State,
+        address.value('(zip_code/text())[1]', 'VARCHAR(255)') as ZipCode
+    from
+        Brand
+    cross apply
+        Brand_Details.nodes('//rma_address') as T(address)
+    where
+        [Brand_ID] = @BrandID;
+end;
+--sample query
+declare @BrandID Int
+set @BrandID = 1
+
+exec usp_GetAddressFromBrandXML @BrandID;
