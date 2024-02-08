@@ -5,7 +5,7 @@ returns Int
 as
 begin
     declare @DurationInDays Int;
-    set @DurationInDays=datediff(day,@StartMaintenanceDate,@EndMaintanenceDate)
+    set @DurationInDays=datediff(day,@StartMaintenanceDate,@EndMaintanenceDate) --datediff,day-based time difference
     return @DurationInDays;
 end;
 
