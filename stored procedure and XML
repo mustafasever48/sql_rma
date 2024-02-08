@@ -1,4 +1,4 @@
---stored procedure 1
+--stored procedure 4
 create procedure usp_GetProductFromXML
     @ProductID Int
 as
@@ -29,7 +29,7 @@ set @ProductID = 1
 
 exec usp_GetProductFromXML @ProductID;
 
---stored procedure 2
+--stored procedure 5
 
 create procedure usp_UpdateBrandDetails
     @BrandID Int,
@@ -73,7 +73,7 @@ set @BrandID = 1
 
 exec usp_UpdateBrandDetails @BrandID, '456 Updated Street', 'San Francisco', 'California', '54321';
 
---stored procedure 3
+--stored procedure 6
 create procedure usp_GetAddressFromBrandXML
     @BrandID Int
 as
