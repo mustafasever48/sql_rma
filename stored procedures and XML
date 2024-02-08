@@ -7,7 +7,7 @@ begin
         select
             P.Product_ID,
             P.Product_Name,
-            P.Product_Details.value('(//technical_specifications/feature)[1]', 'VARCHAR(255)') as Feature,
+            P.Product_Details.value('(//technical_specifications/feature)[1]', 'varchar(255)') as Feature,
             B.Brand_Name,
             M.Model_Name
         from
@@ -79,10 +79,10 @@ create procedure usp_GetAddressFromBrandXML
 as
 begin
     select
-        address.value('(street/text())[1]', 'VARCHAR(255)') as Street,
-        address.value('(city/text())[1]', 'VARCHAR(255)') as City,
-        address.value('(state/text())[1]', 'VARCHAR(255)') as State,
-        address.value('(zip_code/text())[1]', 'VARCHAR(255)') as ZipCode
+        address.value('(street/text())[1]', 'varchar(255)') as Street,
+        address.value('(city/text())[1]', 'varchar(255)') as City,
+        address.value('(state/text())[1]', 'varchar(255)') as State,
+        address.value('(zip_code/text())[1]', 'varchar(255)') as ZipCode
     from
         Brand
     cross apply
