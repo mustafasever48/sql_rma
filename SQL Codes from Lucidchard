@@ -1,5 +1,5 @@
 CREATE TABLE [Brand] (
-  [Brand_ID] Int IDENTITY(1,1) PRIMARY KEY,
+  [Brand_ID] Int IDENTITY(1,1) PRIMARY KEY,   --added IDENTITY(1,1) for the PK of each table
   [Brand_Name] Varchar(20),
   [Brand_Details] XML,
   [Brand_Website] Varchar(255),
